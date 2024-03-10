@@ -6,7 +6,7 @@ Use the submodules dropdown above to view the 4 submodules defined within this m
 
 
 Features
-------------------------------------------------------------------------------------------------------------------------
+ 
 1- Create mutlistack application with MySQl, Elasticached, ActiveMQ in the backend, and Beanstalk in the frontend.
 
 2- Iam role and policies for beantalk
@@ -14,10 +14,10 @@ Features
 
 
 Usage
-------------------------------------------------------------------------------------------------------------------------
-1- create a Directory where the network codes are set as root module. Then create a directory called modules where your bastion, frontend, db, and iam_role modules will be created
+ 
+1- create a Directory where the network codes are set as root module. Then create a directory called modules where your bastion, frontend, db, and iam_role directories will be created
 
-The root module create a network for the whole infrastructure. It has public subnet in 2 AZ where the bastion and beanstalk instances will be deployed. A private subnet for backend resources; two elastic IP, two nat gateway in the public subnet; route tables for public and private subnets.
+The root module create a network for the whole infrastructure. It has public subnets in 2 AZ where the bastion and beanstalk instances will be deployed. A private subnets for backend resources; two elastic IPs, two nat gateways in the public subnet; route tables for public and private subnets.
 
 terraform init
  terraform plan
@@ -30,7 +30,7 @@ terraform init
  terraform plan
  terraform apply
 
-Edit bastion security group to add SSH rule form MyIP
+Edit bastion security group to add SSH rule from MyIP
  
 
 Important: The network should have been created already, beacuse you need to refere this data.terraform_remote_state.vpc in your bastion main.tf code file
@@ -45,9 +45,9 @@ terraform init
  terraform plan
  terraform apply
 
-It will generate password for mysql and ActiveMQ and stored in the parameter store in the system manager.
+It will generate passwords for mysql and ActiveMQ and stored them in the parameter store in the system manager.
 
-Will create mysql, Elaticached, and ActiveMQ instances and a backend securyty group.
+Will create RDS, Elaticached, and ActiveMQ instances and a backend securyty group.
 
 You must set up the data.terraform_remote_state.bastion, data.terraform_remote_state.vpc, and the terraform local backend for terraform apply to work without error messages.
 
@@ -88,7 +88,7 @@ terraform init
 The source bundle is needed for your elasticbeanstalk app. Found here
 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/tutorials.html.
 
-My domain name server was purchased in Goddady. I added a CNAME record and the value provided was my beanstalk domain name. After provisioning your environement, edit the configuration to add listener https and provide your domain name certificate.
+My domain name server was purchased in Goddady. I added a CNAME record and the value provided was my beanstalk domain name. After provisioning your environment, edit the configuration to add listener https and provide your domain name certificate.
 
 The path of the source bundle will be provided in your "aws_s3_object" resource in the source argument.
 
