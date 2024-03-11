@@ -18,7 +18,7 @@ terraform {
 data "aws_region" "current" {}
 
 data "aws_ami" "ubuntu" {
-  #executable_users = ["self"]
+  description = "Ubuntu image for bastion instance"
   most_recent = true
   #name_regex       = "^myami-\\d{3}"
   owners = ["099720109477"]
@@ -36,6 +36,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "bastion" {
   #count                       = length(data.terraform_remote_state.vpc.outputs.public_subnet_ids)
+
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
   associate_public_ip_address = true
@@ -53,11 +54,11 @@ resource "aws_instance" "bastion" {
 
 resource "aws_security_group" "bastion_sg" {
   name        = "bastion_sg"
-  description = "Allow ssh"
+  description = "The security group for bastion instance"
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress {
-    description = "allow ssh"
+    description = "Allow traffic from the internet"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
