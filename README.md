@@ -101,8 +101,8 @@ To delete the resources provisioned do it in the following order
 
 1- DB
 2- bastion
-3- network
-4- frontend
+3- frontend 
+4- network 
 5- last iam_role
 
 
